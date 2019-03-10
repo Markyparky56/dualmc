@@ -21,8 +21,8 @@ namespace dualmc {
     
 
 typedef float VertexComponentsType;
-typedef int32_t QuadIndexType;
-typedef int32_t TriIndexType;
+typedef uint32_t QuadIndexType;
+typedef uint32_t TriIndexType;
 
 /// vertex structure for dual points
 struct Vertex {
@@ -136,7 +136,7 @@ private:
       );*/
 
 
-private:
+protected:
 
     /// enum with edge codes for a 12-bit voxel edge mask to indicate
     /// grid edges which intersect the ISO surface of classic marching cubes
@@ -182,7 +182,7 @@ private:
     /// Compute a linearized cell cube index.
     int32_t gA(int32_t const x, int32_t const y, int32_t const z) const;
 
-private:
+protected:
     // static lookup tables needed for (manifold) dual marching cubes
 
     /// Dual Marching Cubes table
@@ -196,7 +196,7 @@ private:
     /// Needed for manifold dual marching cubes.
     static uint8_t const problematicConfigs[256];
     
-private:
+protected:
 
     /// convenience volume extent array for x-,y-, and z-dimension
     int32_t dims[3];
@@ -942,8 +942,6 @@ void DualMC<T>::buildSharedVerticesTris(
   std::vector<Vertex> & vertices,
   std::vector<Tri> & tris
 ) {
-
-
   int32_t const reducedX = dims[0] - 2;
   int32_t const reducedY = dims[1] - 2;
   int32_t const reducedZ = dims[2] - 2;
